@@ -1,26 +1,27 @@
-import unzipper from 'unzipper'
-import stream from 'readable-stream'
-import Core from 'barnard59-core'
+const unzipper = require('unzipper')
+const stream = require('readable-stream')
+const Core = require('barnard59-core')
 
-export function unzip () {
+function unzip () {
   return unzipper.Parse()
 }
 
-export function unzipOne (pattern) {
+function unzipOne (pattern) {
   return unzipper.ParseOne(pattern)
 }
 
 class UnzipTransform extends stream.Transform {
-  constructor (subPipeline, shouldProcess) {
+  constructor (subPipeline, shouldProcess, log) {
     super({ objectMode: true })
 
     this.shouldProcess = shouldProcess
     this.subPipeline = subPipeline
+    this.log = log
   }
 
   _transform (entry, e, cb) {
     if (this.shouldProcess && this.shouldProcess(entry.path) === false) {
-      console.log(`Skipping file ${entry.path}`)
+      this.log.info(`Skipping file ${entry.path}`)
       entry.autodrain()
       cb()
       return
@@ -35,12 +36,18 @@ class UnzipTransform extends stream.Transform {
     nextStream.variables.set('csv', entry.path)
 
     nextStream._init().then(() => {
-      console.log(`Start processing file ${entry.path}`)
+      this.log.info(`Start processing file ${entry.path}`)
       entry.pipe(nextStream.streams[0]).on('finish', cb)
     })
   }
 }
 
-export function transform (subPipeline, shouldProcess) {
-  return new UnzipTransform(subPipeline, shouldProcess)
+function transform (subPipeline, shouldProcess) {
+  return new UnzipTransform(subPipeline, shouldProcess, this.log)
+}
+
+module.exports = {
+  unzip,
+  unzipOne,
+  transform
 }

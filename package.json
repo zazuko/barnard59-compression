@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Handling compression streams in barnard59 pipelines",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "mocha",
     "prepublishOnly": "barnard59-docs --local . > readme.md",
