@@ -10,10 +10,6 @@ export function unzipOne (pattern) {
   return unzipper.ParseOne(pattern)
 }
 
-export function extract (destinationDir) {
-  return unzipper.Extract({ path: destinationDir })
-}
-
 class UnzipTransform extends stream.Transform {
   constructor (subPipeline, shouldProcess) {
     super({ objectMode: true })
