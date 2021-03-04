@@ -1,5 +1,5 @@
 {
-  "name": "banard59-compression",
+  "name": "barnard59-compression",
   "version": "0.0.0",
   "description": "Handling compression streams in barnard59 pipelines",
   "main": "index.js",

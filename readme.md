@@ -1,4 +1,4 @@
-# banard59-compression
+# barnard59-compression
 
 Handling compression streams in barnard59 pipelines
 
