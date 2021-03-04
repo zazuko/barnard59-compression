@@ -1,0 +1,24 @@
+{
+  "name": "banard59-compression",
+  "version": "0.0.0",
+  "description": "Handling compression streams in barnard59 pipelines",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zazuko/barnard59-compression.git"
+  },
+  "keywords": [
+    "stream",
+    "pipeline",
+    "barnard59"
+  ],
+  "author": "Zazuko GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zazuko/barnard59-compression/issues"
+  },
+  "homepage": "https://github.com/zazuko/barnard59-compression#readme"
+}
