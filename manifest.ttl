@@ -1,0 +1,31 @@
+@base <https://barnard59.zazuko.com/operations/compression/> .
+@prefix code: <https://code.described.at/> .
+@prefix p: <https://pipeline.described.at/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<unzip> a p:Operation, p:Readable ;
+        rdfs:label "Unzip a compressed stream" ;
+        rdfs:comment
+            "Transforms a compressed zip stream into a new stream where each chunk is a stream of a file's contents" ;
+        code:implementedBy [
+                               a code:EcmaScript ;
+                               code:link <node:barnard59-compression/zip.js#unzip>
+                           ] .
+
+<unzipOne> a p:Operation, p:Readable ;
+           rdfs:label "Unzips first file from a compressed stream" ;
+           rdfs:comment
+               "Transforms a compressed zip stream into a stream of the first file found in the compresed input matching a pattern" ;
+           code:implementedBy [
+                                  a code:EcmaScript ;
+                                  code:link <node:barnard59-compression/zip.js#unzipOne>
+                              ] .
+
+<transform> a p:Operation, p:Readable ;
+            rdfs:label "Process uncompressed files with sub pipeline" ;
+            rdfs:comment
+                "Use in combination with #unzip to process every file using the given sub pipeline. Optionally, provide a second argument to decide whether any given file should be skipped" ;
+            code:implementedBy [
+                                   a code:EcmaScript ;
+                                   code:link <node:barnard59-compression/zip.js#transform>
+                               ] .
